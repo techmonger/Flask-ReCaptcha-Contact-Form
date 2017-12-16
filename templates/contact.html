@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact Form</title>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
+<h2>Contact</h2>
+<form action="{{ url_for('contact') }}" method="post">
+<table border="2">
+<tr>
+<td>Name :</td> 
+<td><input type="text" name="name" /></td>
+</tr>
+<tr>
+<td>Email  :</td> 
+<td><input type="email" name="email" /></td>
+</tr>
+<tr>
+<td>Message :</td> 
+<td><textarea name="message" rows="4" cols="50"></textarea></td>
+</tr>
+<tr>
+<td>Security Check</td>
+<td><div class="g-recaptcha" data-sitekey="{{ sitekey }}"></div></td>
+</tr>
+<tr>
+<td><input type="submit" value="Send" /></td>
+</tr>
+</table>
+</form>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+</body>
+</html>
